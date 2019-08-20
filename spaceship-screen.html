@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    
+    font-size: 18px;
+    font-weight: 400;
+}
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+.html .tag, .css .selector-class, .css .selector-tag, .javascript .keyword {
+    color: #3182bd;
+}
+.html .string, .javascript .string, .javascript .regexp {
+    color: #756bb1;
+}
+.html .meta, .css .number, .javascript .number {
+    color: #31a354;
+}
+.html .attr, .css .attribute, .javascript .class, .javascript .special {
+    color: #e6550d;
+}
+
+</style>
+<body>
+    <div class="text">
+    <p>Mike finds himself in an empty, white room with no doors and a screen full of brightly colored squares before him</p>
+    <p>"What does it mean?" he wonders aloud.</p>
+    <a href="/map.html">Touch the screen</a>
+</div>
+    <div class='viz'></div>
+    <div class='code'>
+            <pre>
+                <h3>D3 Color, D3 Scale</h3>
+                <code class="html hljs xml"><span class="meta">&lt;!DOCTYPE html&gt;</span>
+                <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span>
+                <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css">
+                
+                <span class="selector-tag">body</span> {
+                  <span class="attribute">margin</span>: <span class="number">0</span>;
+                }
+                
+                <span class="selector-tag">div</span> {
+                  <span class="attribute">position</span>: absolute;
+                  <span class="attribute">width</span>: <span class="number">20px</span>;
+                  <span class="attribute">height</span>: <span class="number">20px</span>;
+                  <span class="attribute">border</span>: solid <span class="number">1px</span> <span class="number">#fff</span>;
+                }
+                
+                </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span>
+                <span class="tag">&lt;<span class="name">body</span>&gt;</span>
+                <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//d3js.org/d3.v4.0.0-alpha.22.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>
+                <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">
+                
+                <span class="keyword">var</span> z = <span class="number">20</span>,
+                    x = <span class="number">500</span> / z,
+                    y = <span class="number">500</span> / z;
+                
+                d3.select(<span class="string">".viz"</span>).selectAll(<span class="string">"square"</span>)
+                    .data(d3.range(x * y))
+                  .enter().append(<span class="string">"div"</span>)
+                    .style(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>{ <span class="keyword">return</span> <span class="string">"translate("</span> + (d % x) * z + <span class="string">"px, "</span> + <span class="built_in">Math</span>.floor(d / x) * z + <span class="string">"px)"</span>; })
+                    .style(<span class="string">"background-color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>{ <span class="keyword">return</span> d3.hsl(d % x / x * <span class="number">360</span>, <span class="number">1</span>, <span class="built_in">Math</span>.floor(d / x) / y); });
+                    setInterval( () => {
+                        const selection = d3.select(<span class="string">`#square-${Math.round(Math.random()*525)}`</span>)
+                        <span class="keyword">if</span>(selection) {
+                            transition(selection)
+                        }
+                    }, <span class="number">750</span>
+                    )
+                <span class="function"><span class="keyword">function</span> <span class="title">transition</span>(<span class="params">selection</span>) </span>{
+                    selection
+                    .transition()
+                      .duration(750)
+                      .style("transform", "translate(250px, 250px) scale(10) rotate(180deg)")
+                      .style("z-index", 10)
+                    .transition()
+                      .delay(1500)
+                      .style("transform", "translate(250px, 250px) scale(0.01)")
+                      .remove();
+                }
+                
+                </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>
+                </code></pre>
+    </div>
+</body>
+<script src="http://d3js.org/d3.v4.0.0-alpha.22.min.js"></script>
+<script>
+
+var z = 20,
+    x = 500 / z,
+    y = 500 / z;
+d3.select(".viz").selectAll(".square")
+    .data(d3.range(x * y)) 
+    .enter()
+    .append("div")
+    .attr('class', 'square')
+    .attr('id', function(d) { return 'square-' +  d; })
+    .style("transform", function(d) { return "translate(" + (d % x) * z + "px, " + Math.floor(d / x) * z + "px)"; })
+    .style("background-color", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y); })
+    
+setInterval( () => {
+    const selection = d3.select(`#square-${Math.round(Math.random()*525)}`)
+    if(selection) {
+        transition(selection)
+    }
+}, 750
+)
+function transition(selection) {
+    selection
+    .transition()
+      .duration(750)
+      .style("transform", "translate(250px, 250px) scale(10) rotate(180deg)")
+      .style("z-index", 10)
+    .transition()
+      .delay(1500)
+      .style("transform", "translate(250px, 250px) scale(0.01)")
+      .remove();
+}
+
+</script>

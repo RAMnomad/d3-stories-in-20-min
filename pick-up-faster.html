@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css"> -->
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    font-size: 18px;
+    font-weight: 400;
+}
+pre p {
+    font-size:14px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+a {
+    margin: 10px;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+
+.hljs-tag, .hljs-css .hljs-selector-class{
+    color: #3182bd;
+}
+.hljs-string, .hljs-regexp {
+    color: #756bb1;
+}
+ .hljs-meta, .hljs-number{
+    color: #31a354;
+}
+.hljs-attr, .hljs-attribute, .hljs-class{
+    color: #e6550d;
+}
+.hljs-comment{
+    color: olive
+}
+</style>
+<body>
+    <div class="text">
+    <p>That's better... </p>
+    <a href="stairs.html">Ready to go into the real world?</a>
+</div>
+    <div class='viz'>
+        <svg height=500 width=500>
+        </svg>
+    </div>
+    <div class='code'>
+            <pre>
+                <h3>D3 Select - Select all, append, data</h3>
+                <p>You can grab entire groups of items and manipulate them with d3.</p>
+                <p>You can even create them on the fly, feeding them data to manage their properties.</p>
+                <code>
+                    <br/>&lt;html&gt;
+                    <br/>&lt;body&gt;
+                    <br/>   &lt;svg height=500 width=500&gt;
+                    <br/>   &lt;/svg&gt;
+                    <br/>&lt;/body&gt;
+                    <br/>&lt;script src=&quot;http://d3js.org/d3.v4.0.0-alpha.22.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script&gt;
+                    <br/>   const data = [{x: 20, y:20, r: 5, color: &quot;red&quot;}, {x: 45, y:75, r: 10, color: &quot;yellow&quot;}, {x: 70, y:20, r: 20, color: &quot;green&quot;}, {x: 95, y:120, r: 15, color: &quot;blue&quot;}, {x: 20, y:180, r: 20, color: &quot;purple&quot;}];
+                    <br/>   const g = d3.select(&quot;svg&quot;)
+                    <br/>       .append('g')
+                    <br/>       .selectAll('circle')
+                    <br/>       .data(data) 
+                    <br/>       .enter()
+                    <br/>       .append(&quot;circle&quot;) //appends a circle for each item in the data array
+                    <br/>       .attr(&quot;cx&quot;, function(d){ return d.x })
+                    <br/>       .attr(&quot;cy&quot;, function(d){ return d.y })
+                    <br/>       .attr(&quot;r&quot;, function(d){ return d.r })
+                    <br/>       .attr(&quot;fill&quot;, function(d){ return d.color });
+                    <br/>   d3.select('g')
+                    <br/>       .attr('transform', 'translate(200, 200)')
+                    <br/>&lt;/script&gt;
+                    <br/>&lt;/html&gt;
+                </code></pre>
+    </div>
+</body>
+<script src="http://d3js.org/d3.v4.0.0-alpha.22.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script>
+    const data = [{x: 20, y:20, r: 5, color: "red"}, {x: 45, y:75, r: 10, color: "yellow"}, {x: 70, y:20, r: 20, color: "green"}, {x: 95, y:120, r: 15, color: "blue"}, {x: 20, y:180, r: 20, color: "purple"}];
+    const g = d3.select("svg")
+        .append('g')
+        .selectAll('circle')
+        .data(data)
+        .enter()
+        .append("circle") //appends a circle for each item in the data array
+        .attr("cx", function(d){ return d.x })
+        .attr("cy", function(d){ return d.y })
+        .attr("r", function(d){ return d.r })
+        .attr("fill", function(d){ return d.color }
+        )
+    d3.select('g')
+        .attr('transform', 'translate(200, 200)')
+</script>
+<script>
+hljs.configure({useBR: true, tabReplace: '    ',});
+hljs.initHighlighting();
+</script>

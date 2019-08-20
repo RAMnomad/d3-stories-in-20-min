@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css"> -->
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    font-size: 18px;
+    font-weight: 400;
+}
+pre p {
+    font-size:14px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+a {
+    margin: 10px;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+#map {
+  position: relative;
+}
+
+svg {
+  background: #FFF;
+  pointer-events: all;
+}
+
+.zone {
+  stroke-width: .5px;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.zoneTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 3px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 12px;
+  font-family: sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;  
+}
+
+.infoLabel {   
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  display: none;
+  border: solid #ccc 1px;
+  color: #666;
+  background: #FFFFFF;    
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 3px #66C2FF;
+  -moz-box-shadow: 0px 0px 3px #66C2FF;
+  box-shadow: 0px 0px 3px #66C2FF;
+  text-align: left;            
+  padding: 2px;      
+  font-size: 12px;
+  font-family: sans-serif; 
+  pointer-events: none;       
+}
+
+.infoLabel span {
+  margin: 0px 5px;
+}
+
+.mapData {
+  fill: #E6E6E6;
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+.ortho {
+  fill: #E6E6E6;
+  stroke: #E6E6E6;
+  stroke-width: 1px;  
+}
+
+.mapData:hover {
+  fill: #66C2FF;
+}
+
+.focused {
+  fill: #FF7519;
+
+}
+.hljs-tag, .hljs-css .hljs-selector-class{
+    color: #3182bd;
+}
+.hljs-string, .hljs-regexp {
+    color: #756bb1;
+}
+ .hljs-meta, .hljs-number{
+    color: #31a354;
+}
+.hljs-attr, .hljs-attribute, .hljs-class{
+    color: #e6550d;
+}
+.hljs-comment{
+    color: olive
+}
+</style>
+<body>
+    <div class="text">
+    <p>The screen changes to reveal the earth below, or maybe it's more of a window.</p>
+    <p>Mike touches the place he was on the planet only a moment ago. </p>
+    <p>It glows blue a moment and then disappears.</p>
+    <p>The earth grows smaller and fades into black.</p>
+
+    <a href="end.html">Farewell Mike, you will be missed...</a>
+</div>
+    <div class='viz'>
+        <svg height=500 width=500>
+        </svg>
+    </div>
+    <div class='code'>
+            <pre>
+                <h3>D3 Geo</h3>
+                <p>The geo library is a way to generate maps and plot data relative to latitude and longitude coordinates.</p>
+                <code>
+                    <br/>&lt;html&gt;
+                    <br/>&lt;body&gt;
+                    <br/>   &lt;svg height=500 width=500&gt;
+                    <br/>   &lt;/svg&gt;
+                    <br/>&lt;/body&gt;
+                    <br/>&lt;script src=&quot;http://d3js.org/d3.v4.0.0-alpha.22.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/d3-geo/1.9.1/d3-geo.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script src=&quot;http://d3js.org/queue.v1.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script src=&quot;https://unpkg.com/topojson@3&quot;&gt;&lt;/script&gt;
+                <br/>    <br/>&lt;script&gt;
+                <br/>    var mapWidth = 500,
+                <br/>    mapHeight = 500,
+                <br/>    focused = false,
+                <br/>    ortho = true, 
+                <br/>    speed = -7e-3,
+                <br/>    start = Date.now(),
+                <br/>    corr = 0;
+                <br/>    
+                <br/>    var projectionGlobe = d3.geoOrthographic()
+                <br/>    .scale(240)
+                <br/>    .translate([mapWidth / 2, mapHeight / 2])
+                <br/>    .clipAngle(90);
+                <br/>    
+                <br/>    var projectionMap = d3.geoEquirectangular()
+                <br/>    .scale(145)
+                <br/>    .translate([mapWidth / 2, mapHeight / 2])
+                <br/>    
+                <br/>    var projection = projectionGlobe;
+                <br/>    
+                <br/>    var path = d3.geoPath()
+                <br/>    .projection(projection);
+                <br/>    
+                <br/>    var svgMap = d3.select(&quot;svg&quot;)
+                <br/>    .attr(&quot;overflow&quot;, &quot;hidden&quot;)
+                <br/>    .attr(&quot;width&quot;, mapWidth)
+                <br/>    .attr(&quot;height&quot;, mapHeight);
+                <br/>    
+                <br/>    var zoneTooltip = d3.select(&quot;div#map&quot;).append(&quot;div&quot;).attr(&quot;class&quot;, &quot;zoneTooltip&quot;),
+                <br/>    infoLabel = d3.select(&quot;div#map&quot;).append(&quot;div&quot;).attr(&quot;class&quot;, &quot;infoLabel&quot;);
+                <br/>    var g = svgMap.append(&quot;g&quot;);
+                <br/>    //Starter for function AFTER All transitions
+                <br/>    
+                <br/>    function endall(transition, callback) { 
+                <br/>      var n = 0; 
+                <br/>      transition 
+                <br/>      .each(function() { ++n; }) 
+                <br/>      .each(&quot;end&quot;, function() { if (!--n) callback.apply(this, arguments); }); 
+                <br/>    }
+                <br/>    
+                <br/>    //Loading data
+                <br/>    
+                <br/>    queue()
+                <br/>    .defer(d3.json, &quot;http://raw.githubusercontent.com/d3/d3.github.com/master/world-110m.v1.json&quot;)
+                <br/>    .defer(d3.tsv, &quot;http://raw.githubusercontent.com/KoGor/Map-Icons-Generator/master/data/world-110m-country-names.tsv&quot;)
+                <br/>    .await(ready);
+                <br/>    
+                <br/>    
+                <br/>    function ready(error, world, countryData) {
+                <br/>        console.log(error, world, countryData)
+                <br/>      var countryById = {},
+                <br/>      countries = topojson.feature(world, world.objects.countries).features;
+                <br/>    
+                <br/>      //Adding countries by name
+                <br/>    
+                <br/>      countryData.forEach(function(d) {
+                <br/>        countryById[d.id] = d.name;
+                <br/>      });
+                <br/>    
+                <br/>      //Drawing countries on the globe
+                <br/>    
+                <br/>      var world = g.selectAll(&quot;path&quot;).data(countries);
+                <br/>      world.enter().append(&quot;path&quot;)
+                <br/>      .attr(&quot;class&quot;, &quot;mapData&quot;)
+                <br/>      .attr(&quot;d&quot;, path)
+                <br/>      .classed(&quot;ortho&quot;, ortho = true);
+                <br/>    
+                <br/>      //Events processing
+                <br/>    
+                <br/>      world.on(&quot;mouseover&quot;, function(d) {
+                <br/>        if (ortho === true) {
+                <br/>          infoLabel.text(countryById[d.id])
+                <br/>          .style(&quot;display&quot;, &quot;inline&quot;);
+                <br/>        } else {
+                <br/>          zoneTooltip.text(countryById[d.id])
+                <br/>          .style(&quot;left&quot;, (d3.event.pageX + 7) + &quot;px&quot;)
+                <br/>          .style(&quot;top&quot;, (d3.event.pageY - 15) + &quot;px&quot;)
+                <br/>          .style(&quot;display&quot;, &quot;block&quot;);
+                <br/>        }
+                <br/>      })
+                <br/>      .on(&quot;mouseout&quot;, function(d) {
+                <br/>        if (ortho === true) {
+                <br/>          infoLabel.style(&quot;display&quot;, &quot;none&quot;);
+                <br/>        } else {
+                <br/>          zoneTooltip.style(&quot;display&quot;, &quot;none&quot;);
+                <br/>        }
+                <br/>      })
+                <br/>      .on(&quot;mousemove&quot;, function() {
+                <br/>        if (ortho === false) {
+                <br/>          zoneTooltip.style(&quot;left&quot;, (d3.event.pageX + 7) + &quot;px&quot;)
+                <br/>          .style(&quot;top&quot;, (d3.event.pageY - 15) + &quot;px&quot;);
+                <br/>        }
+                <br/>      })
+                <br/>      
+                <br/>      //Globe rotating via timer
+                <br/>    
+                <br/>      d3.timer(function() {
+                <br/>        var &lambda; = speed * (Date.now() - start);
+                <br/>    
+                <br/>        projection.rotate([&lambda; + corr, -5]);
+                <br/>        g.selectAll(&quot;.ortho&quot;).attr(&quot;d&quot;, path);
+                <br/>    
+                <br/>      });
+                <br/>    
+                <br/>      //Adding extra data when focused
+                <br/>    
+                <br/>      function focus(d) {
+                <br/>        if (focused === d) return reset();
+                <br/>        g.selectAll(&quot;.focused&quot;).classed(&quot;focused&quot;, false);
+                <br/>        d3.select(this).classed(&quot;focused&quot;, focused = d);
+                <br/>      }
+                <br/>    
+                <br/>      //Reset projection
+                <br/>    
+                <br/>      function reset() {
+                <br/>        g.selectAll(&quot;.focused&quot;).classed(&quot;focused&quot;, focused = false);
+                <br/>        infoLabel.style(&quot;display&quot;, &quot;none&quot;);
+                <br/>        zoneTooltip.style(&quot;display&quot;, &quot;none&quot;);
+                <br/>    
+                <br/>        //Transforming Map to Globe
+                <br/>    
+                <br/>        projection = projectionGlobe;
+                <br/>        path.projection(projection);
+                <br/>        g.selectAll(&quot;path&quot;).transition()
+                <br/>        .duration(3000).attr(&quot;d&quot;, path)
+                <br/>        .call(endall, function() {
+                <br/>          g.selectAll(&quot;path&quot;).classed(&quot;ortho&quot;, ortho = true);
+                <br/>          start = Date.now(); // &lt;- reset start for rotation
+                <br/>        });
+                <br/>      }
+                <br/>    };
+                    <br/>&lt;/script&gt;
+                    <br/>&lt;/html&gt;
+                </code></pre>
+    </div>
+</body>
+<script src="http://d3js.org/d3.v4.0.0-alpha.22.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3-geo/1.9.1/d3-geo.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script>
+    var mapWidth = 500,
+mapHeight = 500,
+focused = false,
+ortho = true, 
+speed = -7e-3,
+start = Date.now(),
+corr = 0;
+
+var projectionGlobe = d3.geoOrthographic()
+.scale(240)
+.translate([mapWidth / 2, mapHeight / 2])
+.clipAngle(90);
+
+var projectionMap = d3.geoEquirectangular()
+.scale(145)
+.translate([mapWidth / 2, 100])
+
+var projection = projectionGlobe;
+
+var path = d3.geoPath()
+.projection(projection);
+
+var svgMap = d3.select("svg")
+.attr("overflow", "hidden")
+.attr("width", mapWidth)
+.attr("height", mapHeight);
+
+var zoneTooltip = d3.select("div#map").append("div").attr("class", "zoneTooltip"),
+infoLabel = d3.select("div#map").append("div").attr("class", "infoLabel");
+var g = svgMap.append("g");
+//Starter for function AFTER All transitions
+
+function endall(transition, callback) { 
+  var n = 0; 
+  transition 
+  .each(function() { ++n; }) 
+  .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
+}
+
+//Loading data
+
+queue()
+.defer(d3.json, "http://raw.githubusercontent.com/d3/d3.github.com/master/world-110m.v1.json")
+.defer(d3.tsv, "http://raw.githubusercontent.com/KoGor/Map-Icons-Generator/master/data/world-110m-country-names.tsv")
+.await(ready);
+
+function ready(error, world, countryData) {
+    console.log(error, world, countryData)
+  var countryById = {},
+  countries = topojson.feature(world, world.objects.countries).features;
+
+  //Adding countries by name
+
+  countryData.forEach(function(d) {
+    countryById[d.id] = d.name;
+  });
+
+  //Drawing countries on the globe
+
+  var world = g.selectAll("path").data(countries);
+  world.enter().append("path")
+  .attr("class", "mapData")
+  .attr("d", path)
+  .classed("ortho", ortho = true);
+
+  //Events processing
+
+  world.on("mouseover", function(d) {
+    if (ortho === true) {
+      infoLabel.text(countryById[d.id])
+      .style("display", "inline");
+    } else {
+      zoneTooltip.text(countryById[d.id])
+      .style("left", (d3.event.pageX + 7) + "px")
+      .style("top", (d3.event.pageY - 15) + "px")
+      .style("display", "block");
+    }
+  })
+  .on("mouseout", function(d) {
+    if (ortho === true) {
+      infoLabel.style("display", "none");
+    } else {
+      zoneTooltip.style("display", "none");
+    }
+  })
+  .on("mousemove", function() {
+    if (ortho === false) {
+      zoneTooltip.style("left", (d3.event.pageX + 7) + "px")
+      .style("top", (d3.event.pageY - 15) + "px");
+    }
+  })
+
+  //Globe rotating via timer
+
+  d3.timer(function() {
+    var λ = speed * (Date.now() - start);
+
+    projection.rotate([λ + corr, -5]);
+    g.selectAll(".ortho").attr("d", path);
+
+  });
+
+  //Adding extra data when focused
+
+  function focus(d) {
+    if (focused === d) return reset();
+    g.selectAll(".focused").classed("focused", false);
+    d3.select(this).classed("focused", focused = d);
+  }
+
+  //Reset projection
+
+  function reset() {
+    g.selectAll(".focused").classed("focused", focused = false);
+    infoLabel.style("display", "none");
+    zoneTooltip.style("display", "none");
+
+    //Transforming Map to Globe
+
+    projection = projectionGlobe;
+    path.projection(projection);
+    g.selectAll("path").transition()
+    .duration(3000).attr("d", path)
+    .call(endall, function() {
+      g.selectAll("path").classed("ortho", ortho = true);
+      start = Date.now(); // <- reset start for rotation
+    });
+  }
+};
+</script>
+<script>
+hljs.configure({useBR: true, tabReplace: '    ',});
+hljs.initHighlighting();
+</script>

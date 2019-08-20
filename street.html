@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css"> -->
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    font-size: 18px;
+    font-weight: 400;
+}
+pre p {
+    font-size:14px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+a {
+    margin: 10px;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+
+.hljs-tag, .hljs-css .hljs-selector-class{
+    color: #3182bd;
+}
+.hljs-string, .hljs-regexp {
+    color: #756bb1;
+}
+ .hljs-meta, .hljs-number{
+    color: #31a354;
+}
+.hljs-attr, .hljs-attribute, .hljs-class{
+    color: #e6550d;
+}
+.hljs-comment{
+    color: olive
+}
+</style>
+<body>
+    <div class="text">
+    <p>Mike looks up into the sky as he steps out into a beautiful day.</p>
+    <p>He stairs at the bright pinpoints of light above, confused to see what look like stars in the daylight.</p>
+    <p>The colors around him go kind of funny, and then...</p>
+    <a href="spaceship-screen.html">Everything goes dark</a>
+</div>
+    <div class='viz'>
+        <svg height=500 width=500>
+        </svg>
+    </div>
+    <div class='code'>
+            <pre>
+                <h3>D3 Shape - More complex shapes, areas, and symbols you might need.</h3>
+                <p>Obviously you can't get by on just bar charts.</p>
+                <p>You may need to create filled arcs, or cool stream graphs.</p>
+                <code>
+                    <br/>&lt;html&gt;
+                    <br/>&lt;body&gt;
+                    <br/>   &lt;svg height=500 width=500&gt;
+                    <br/>   &lt;/svg&gt;
+                    <br/>&lt;/body&gt;
+                    <br/>&lt;script src=&quot;http://d3js.org/d3.v4.0.0-alpha.22.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script&gt;
+                    <br/>  
+                    <br/>&lt;/script&gt;
+                    <br/>&lt;/html&gt;
+                </code></pre>
+    </div>
+</body>
+<script src="http://d3js.org/d3.v4.0.0-alpha.22.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script>
+    
+</script>
+<script>
+hljs.configure({useBR: true, tabReplace: '    ',});
+hljs.initHighlighting();
+</script>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css"> -->
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    font-size: 18px;
+    font-weight: 400;
+}
+pre p {
+    font-size:14px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+a {
+    margin: 10px;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+
+.hljs-tag, .hljs-css .hljs-selector-class{
+    color: #3182bd;
+}
+.hljs-string, .hljs-regexp {
+    color: #756bb1;
+}
+ .hljs-meta, .hljs-number{
+    color: #31a354;
+}
+.hljs-attr, .hljs-attribute, .hljs-class{
+    color: #e6550d;
+}
+</style>
+<body>
+    <div class="text">
+    <p>That's better... </p>
+    <a href="pick-up-faster.html">Let's make it easier</a>
+</div>
+    <div class='viz'>
+        <svg height=500 width=500>
+            <circle r="10" fill="red" id="red"></circle>
+            <circle r="20" fill="yellow" id="yellow"></circle>
+            <circle r="30" fill="green" id="green"></circle>
+            <circle r="40" fill="blue" id="blue"></circle>
+        </svg>
+    </div>
+    <div class='code'>
+            <pre>
+                <h3>D3 Select</h3>
+                <p>Everything in D3 is built off of the select function, which operates similarly to document.querySelector()</p>
+                <p>From there, you can manipulate properties.</p>
+                <code>
+                    <br/>&lt;html&gt;
+                    <br/>&lt;body&gt;
+                    <br/>   &lt;svg height=500 width=500&gt;
+                    <br/>       &lt;circle r=&quot;10&quot; fill=&quot;red&quot; id=&quot;red&quot;&gt;&lt;/circle&gt;
+                    <br/>       &lt;circle r=&quot;20&quot; fill=&quot;yellow&quot; id=&quot;yellow&quot;&gt;&lt;/circle&gt;
+                    <br/>       &lt;circle r=&quot;30&quot; fill=&quot;green&quot; id=&quot;green&quot;&gt;&lt;/circle&gt;
+                    <br/>       &lt;circle r=&quot;40&quot; fill=&quot;blue&quot; id=&quot;blue&quot;&gt;&lt;/circle&gt;
+                    <br/>   &lt;/svg&gt;
+                    <br/>&lt;/body&gt;
+                    <br/>&lt;script src=&quot;http://d3js.org/d3.v4.0.0-alpha.22.min.js&quot;&gt;&lt;/script&gt;
+                    <br/>&lt;script&gt;
+                    <br/>   var colors = ['red', 'yellow', 'green', 'blue']
+                    <br/>   colors.forEach(function(color, index) {
+                    <br/>       d3.select(`#${color}`)
+                    <br/>         .attr('cx', index * 100 + 50)
+                    <br/>         .attr('cy', index * 100 + 50)
+                    <br/>   })
+                    <br/>&lt;/script&gt;
+                    <br/>&lt;/html&gt;
+                </code></pre>
+    </div>
+</body>
+<script src="http://d3js.org/d3.v4.0.0-alpha.22.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script>
+const colors = ['red', 'yellow', 'green', 'blue']
+colors.forEach(function(color, index) {
+    setTimeout(function(){
+        d3.select(`#${color}`)
+        .attr('cx', index * 100 + 50)
+        .attr('cy', index * 100 + 50)
+    }, 250)
+})
+
+</script>
+<script>
+hljs.configure({useBR: true, tabReplace: '    ',});
+hljs.initHighlighting();
+</script>

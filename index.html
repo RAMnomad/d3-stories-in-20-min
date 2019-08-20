@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css"> -->
+<style>
+
+body {
+  margin: 0;
+}
+.text {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+p {
+    
+    font-size: 18px;
+    font-weight: 400;
+}
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #fff;
+}
+
+.code, .viz{
+    display: inline-block;
+    padding: 18px;
+    margin: 2em 0 2em;
+    max-width: 50%;
+    max-height: 80vh;
+    overflow: scroll;
+}
+.code {
+    border-left: solid 2px #ccc;
+}
+.viz {
+    min-height: 500px;
+    min-width: 500px;
+}
+
+.hljs-tag, .hljs-css .hljs-selector-class{
+    color: #3182bd;
+}
+.hljs-string, .hljs-regexp {
+    color: #756bb1;
+}
+ .hljs-meta, .hljs-number{
+    color: #31a354;
+}
+.hljs-attr, .hljs-attribute, .hljs-class{
+    color: #e6550d;
+}
+</style>
+<body>
+    <div class="text">
+    <p>Meet Mike. </p>
+    <p>Mike Bostock is the creator of the d3 library.</p>
+    <p>D3.js is composed into small libraries. Each one makes a specific kind of visual manipulation easier.</p>
+    <p>You can use these tools to make data visualizations, manage the display of information, or create animations.</p>
+    <a href="wake-up.html">Start Mike's Day</a>
+</div>
+    <div class='viz'>
+        <svg height=500 width=500>
+            <defs>
+                <pattern id="mike" patternUnits="userSpaceOnUse" width="40" height="40">
+                    <image xlink:href="mike.jpeg" x="0" y="0" width="40" height="40" />
+                </pattern>
+                <linearGradient x1="-15.1688445%" y1="25.486364%" x2="78.770148%" y2="52.874328%" id="linearGradient-1">
+                        <stop stop-color="#000000" offset="0%"></stop>
+                        <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+                    </linearGradient>
+            </defs>
+            <g id="mike_standing" transform="translate(250, 200) scale(2)">
+                <circle cx="20" cy="-20" r="20" fill="url(#mike)"></circle>
+                <path d="M21.0795,0.25377 C9.4495,8.66777 11.7055,73.77677 16.7835,71.26677 C24.3965,67.48677 10.2485,5.83177 21.0795,0.25377 Z" id="path3077" stroke="#000000" stroke-width="3"></path>
+                <path d="M16.4015,5.87777 C-4.4915,66.27677 1.7525,73.55677 1.7545,73.55677" id="path4874" stroke="#000000" stroke-width="1.9"></path>
+                <path d="M18.9265,13.45377 C23.9775,46.28677 32.0585,64.46677 32.0585,64.46677" id="path4876" stroke="#000000" stroke-width="1.9"></path>
+                <path d="M13.0755,66.92677 C16.6515,134.91677 7.3105,128.60677 7.8155,130.12677 C8.3205,131.63677 8.8255,133.66677 8.8255,133.66677" id="path4878" stroke="#000000" stroke-width="1.9"></path>
+                <path d="M16.7545,67.94677 C28.4445,98.13677 14.9055,127.61677 15.3455,130.22677 C15.6115,131.79677 28.5535,131.70677 28.5535,131.70677" id="path4880" stroke="#000000" stroke-width="1.9"></path>
+                <path d="M7.3105,130.62677 C4.8665,133.11677 -0.8525,133.11677 1.7545,134.67677 C7.1205,137.87677 6.7285,141.46677 10.3405,137.70677 C14.2725,133.60677 23.4725,137.19677 7.3105,130.62677 Z" id="path4882" stroke="#000000" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M20.3105,128.05677 C17.8665,130.54677 14.6475,129.11677 17.2545,130.67677 C22.6205,133.87677 30.0855,136.75677 33.6975,132.98677 C37.6295,128.88677 36.4725,134.62677 20.3105,128.05677 L20.3105,128.05677 Z" id="path5757" stroke="#000000" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M5.8645,73.58677 C2.3845,73.76677 0.4475,65.34677 1.3135,68.25677 C3.0945,74.25677 -1.8955,81.17677 3.3105,80.84677 C8.9785,80.49677 13.3205,89.36677 5.8645,73.58677 Z" id="path5759" stroke="#000000" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M34.7855,64.49677 C31.3045,64.67677 29.3675,56.25677 30.2335,59.16677 C32.0145,65.15677 27.0245,72.08677 32.2305,71.75677 C37.8985,71.39677 42.2405,80.26677 34.7855,64.49677 L34.7855,64.49677 Z" id="path5761" stroke="#000000" fill="#000000" fill-rule="nonzero"></path>
+                <path d="M24.7875,134.91677 C37.3985,133.96677 11.3085,138.82677 9.7185,139.15677 C1.6545,140.13677 26.7845,137.13677 35.5135,136.12677 C53.8595,134.66677 10.8945,141.14677 8.4585,141.70677 C9.2005,138.59677 42.0875,132.71677 33.2025,137.91677 C19.1695,145.03677 21.7195,142.85677 35.2355,141.34677 C57.4535,139.44677 30.4035,144.99677 22.7685,146.77677 C18.5485,144.74677 61.6865,137.22677 41.8065,143.54677 C40.5785,145.23677 34.1025,146.14677 43.4765,143.77677 C44.7185,143.45677 41.0255,144.52677 39.8315,144.98677 C35.8025,146.55677 35.5975,146.97677 39.8525,147.60677 C44.0915,148.07677 48.3405,148.41677 52.5855,148.82677 L46.4655,151.35677 C42.1745,150.90677 37.8715,150.58677 33.5755,150.17677 C21.5685,148.48677 46.0415,139.20677 48.8605,142.04677 C43.3425,143.85677 12.6695,149.11677 29.0205,143.94677 C48.1135,140.34677 42.3435,143.09677 29.2785,143.96677 C16.0775,145.61677 10.9585,146.21677 26.4075,138.87677 C32.8135,135.80677 -4.8065,145.65677 14.8445,138.81677 C23.0015,137.32677 57.9285,131.94677 29.6595,138.69677 C19.5955,139.75677 -16.3805,144.51677 15.5955,136.50677 C30.3005,133.47677 34.3895,134.68677 18.1045,137.57677 L24.7875,134.91677 L24.7875,134.91677 Z" id="path6737" fill="url(#linearGradient-1)" fill-rule="nonzero"></path>
+            </g>
+        </svg>
+    </div>
+    <div class='code'>
+            <pre>
+                <h4>An introduction to SVGs</h4>
+                <code>
+                    <br/>&lt;html&gt;
+                    <br/>&lt;body&gt;
+                    <br/>&lt;svg height=500 width=500&gt;
+                    <br/>   &lt;defs&gt;
+                    <br/>       &lt;pattern id=&quot;mike&quot; patternUnits=&quot;userSpaceOnUse&quot; width=&quot;40&quot; height=&quot;40&quot;&gt;
+                    <br/>           &lt;image xlink:href=&quot;mike.jpeg&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;
+                    <br/>       &lt;/pattern&gt;
+                    <br/>       &lt;linearGradient x1=&quot;-15.1688445%&quot; y1=&quot;25.486364%&quot; x2=&quot;78.770148%&quot; y2=&quot;52.874328%&quot; id=&quot;linearGradient-1&quot;&gt;
+                    <br/>           &lt;stop stop-color=&quot;#000000&quot; offset=&quot;0%&quot;&gt;&lt;/stop&gt;
+                    <br/>           &lt;stop stop-color=&quot;#000000&quot; stop-opacity=&quot;0&quot; offset=&quot;100%&quot;&gt;&lt;/stop&gt;
+                    <br/>       &lt;/linearGradient&gt;
+                    <br/>   &lt;/defs&gt;
+                    <br/>   &lt;g id=&quot;mike_standing&quot; transform=&quot;translate(250, 50)&quot;&gt;
+                    <br/>       &lt;circle cx=&quot;20&quot; cy=&quot;-20&quot; r=&quot;20&quot; fill=&quot;url(#mike)&quot;&gt;&lt;/circle&gt;
+                    <br/>       &lt;path d=&quot;M21.0795,0.25377 C9.4495,8.66777 11.7055,73.77677 16.7835,71.26677 C24.3965,67.48677 10.2485,5.83177 21.0795,0.25377 Z&quot; id=&quot;path3077&quot; stroke=&quot;#000000&quot; stroke-width=&quot;3&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M16.4015,5.87777 C-4.4915,66.27677 1.7525,73.55677 1.7545,73.55677&quot; id=&quot;path4874&quot; stroke=&quot;#000000&quot; stroke-width=&quot;1.9&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M18.9265,13.45377 C23.9775,46.28677 32.0585,64.46677 32.0585,64.46677&quot; id=&quot;path4876&quot; stroke=&quot;#000000&quot; stroke-width=&quot;1.9&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M13.0755,66.92677 C16.6515,134.91677 7.3105,128.60677 7.8155,130.12677 C8.3205,131.63677 8.8255,133.66677 8.8255,133.66677&quot; id=&quot;path4878&quot; stroke=&quot;#000000&quot; stroke-width=&quot;1.9&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M16.7545,67.94677 C28.4445,98.13677 14.9055,127.61677 15.3455,130.22677 C15.6115,131.79677 28.5535,131.70677 28.5535,131.70677&quot; id=&quot;path4880&quot; stroke=&quot;#000000&quot; stroke-width=&quot;1.9&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M7.3105,130.62677 C4.8665,133.11677 -0.8525,133.11677 1.7545,134.67677 C7.1205,137.87677 6.7285,141.46677 10.3405,137.70677 C14.2725,133.60677 23.4725,137.19677 7.3105,130.62677 Z&quot; id=&quot;path4882&quot; stroke=&quot;#000000&quot; fill=&quot;#000000&quot; fill-rule=&quot;nonzero&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M20.3105,128.05677 C17.8665,130.54677 14.6475,129.11677 17.2545,130.67677 C22.6205,133.87677 30.0855,136.75677 33.6975,132.98677 C37.6295,128.88677 36.4725,134.62677 20.3105,128.05677 L20.3105,128.05677 Z&quot; id=&quot;path5757&quot; stroke=&quot;#000000&quot; fill=&quot;#000000&quot; fill-rule=&quot;nonzero&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M5.8645,73.58677 C2.3845,73.76677 0.4475,65.34677 1.3135,68.25677 C3.0945,74.25677 -1.8955,81.17677 3.3105,80.84677 C8.9785,80.49677 13.3205,89.36677 5.8645,73.58677 Z&quot; id=&quot;path5759&quot; stroke=&quot;#000000&quot; fill=&quot;#000000&quot; fill-rule=&quot;nonzero&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M34.7855,64.49677 C31.3045,64.67677 29.3675,56.25677 30.2335,59.16677 C32.0145,65.15677 27.0245,72.08677 32.2305,71.75677 C37.8985,71.39677 42.2405,80.26677 34.7855,64.49677 L34.7855,64.49677 Z&quot; id=&quot;path5761&quot; stroke=&quot;#000000&quot; fill=&quot;#000000&quot; fill-rule=&quot;nonzero&quot;&gt;&lt;/path&gt;
+                    <br/>       &lt;path d=&quot;M24.7875,134.91677 C37.3985,133.96677 11.3085,138.82677 9.7185,139.15677 C1.6545,140.13677 26.7845,137.13677 35.5135,136.12677 C53.8595,134.66677 10.8945,141.14677 8.4585,141.70677 C9.2005,138.59677 42.0875,132.71677 33.2025,137.91677 C19.1695,145.03677 21.7195,142.85677 35.2355,141.34677 C57.4535,139.44677 30.4035,144.99677 22.7685,146.77677 C18.5485,144.74677 61.6865,137.22677 41.8065,143.54677 C40.5785,145.23677 34.1025,146.14677 43.4765,143.77677 C44.7185,143.45677 41.0255,144.52677 39.8315,144.98677 C35.8025,146.55677 35.5975,146.97677 39.8525,147.60677 C44.0915,148.07677 48.3405,148.41677 52.5855,148.82677 L46.4655,151.35677 C42.1745,150.90677 37.8715,150.58677 33.5755,150.17677 C21.5685,148.48677 46.0415,139.20677 48.8605,142.04677 C43.3425,143.85677 12.6695,149.11677 29.0205,143.94677 C48.1135,140.34677 42.3435,143.09677 29.2785,143.96677 C16.0775,145.61677 10.9585,146.21677 26.4075,138.87677 C32.8135,135.80677 -4.8065,145.65677 14.8445,138.81677 C23.0015,137.32677 57.9285,131.94677 29.6595,138.69677 C19.5955,139.75677 -16.3805,144.51677 15.5955,136.50677 C30.3005,133.47677 34.3895,134.68677 18.1045,137.57677 L24.7875,134.91677 L24.7875,134.91677 Z&quot; id=&quot;path6737&quot; fill=&quot;url(#linearGradient-1)&quot; fill-rule=&quot;nonzero&quot;&gt;&lt;/path&gt;
+                    <br/>   &lt;/g&gt;
+                    <br/>&lt;/svg&gt;
+                    <br/>&lt;/html&gt;
+                    <br/>&lt;/body&gt;
+                </code></pre>
+    </div>
+</body>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script>
+hljs.configure({useBR: true, tabReplace: '    ',});
+hljs.initHighlighting();
+</script>
